@@ -1,0 +1,74 @@
+				<h2>Admin Panel</h2>
+
+				<h3>Add a Scenario</h3>
+				<input type="text" ng-model="scenarioTitle" placeholder="Scenario Title">
+				<input type="text" ng-model="scenarioSummary" placeholder="Scenario Summary">
+				<h4>Add the Initial Narrative for this Scenario:</h4>
+  	    <div class="panel panel-default">
+					<div class="panel-heading" text-angular ng-model="firstNarrative" name="firstNarrativeTextArea" ta-text-editor-class="border-around container" ta-html-editor-class="border-around" placeholder="Type Narrative Here"></div>
+		  	</div> <!-- /.panel panel-default -->
+
+				<a class="btn btn-info btn-xs" ng-click="addScenario($event)">Save Scenario</a><br><br>
+
+				<h3>All Scenarios</h3>
+				<table class="table table-striped table-hover">
+					<tr>
+						<th>View Details</th><th>Scenario Titles</th><th>Summary</th><th>ID</th><th></th>
+					</tr>
+					<tr ng-repeat="(key, scenario) in scenarios">
+						<td width="100px">
+							<a class="btn btn-info btn-xs" ng-click="setSelected();">+</a><br>
+						</td>
+						<td>{{scenario.title}}</td>
+						<td>{{scenario.summary}}</td>
+						<td>{{scenario.id}}</td>
+						<td width="150px">
+							<a class="btn btn-info btn-xs" ng-click="deleteScenario(key)">Delete Scenario</a>
+					</tr>
+				</table>
+				<h3>Add a Narrative</h3>	
+		  	    <div class="panel panel-default">
+					<div class="panel-heading" text-angular ng-model="story" name="narrativeTextArea" ta-text-editor-class="border-around container" ta-html-editor-class="border-around" placeholder="Type Narrative Here"></div>
+			  	</div> <!-- /.panel panel-default -->
+				<br>
+			  	
+				<select ng-model="selectedScenario" ng-options="scenario.id as scenario.title for (key,scenario) in scenarios">
+					<option value="">-- Associate to scenario --</option>
+				</select>
+				{{selectedScenario}}
+				<a class="btn btn-info btn-xs" ng-click="addNarrative($event)">Save Narrative</a><br><br>
+				
+				<h3>All Narratives</h3>
+				<table class="table table-striped table-hover">
+					<tr>
+						<th>View Details</th><th>Text</th><th>Associated Scenario</th><th></th>
+					</tr>
+					<tr ng-repeat="(key, narrative) in narratives">
+						<td width="100px">
+							<a class="btn btn-info btn-xs" ng-click="setSelected();">+</a><br>
+						</td>
+						<td>{{narrative.description | limitTo:20}}...</td>
+						<td>{{narrative.associatedScenario}}</td>
+						<td width="150px">
+							<a class="btn btn-info btn-xs" ng-click="deleteNarrative(key)">Delete Narrative</a>
+					</tr>
+				</table>
+
+
+				<div ng-bind-html = mainNarrative.description> {{mainNarrative.description}} </div>
+
+				<h4>Where can you go from here?</h4>
+				<div ng-repeat="decisionOption in decisionOptions" ng-show="decisionOption.associatedNarrative == mainNarrative.id">
+					<p>
+						{{decisionOption.description}} {{decisionOption.nextStep}}
+						<a class="btn btn-info btn-xs" ng-click="loadNextStep();">Navigate to next step</a><br>
+					</p>
+				</div> 
+				<div id="decisionOption">					
+					<input type="textarea" ng-model="optionDescription" placeholder="Option description">
+					<select ng-model="selectNextNarrative" ng-options="narrative.id for (key,narrative) in narratives">
+						<option value="">-- Which narrative comes next? --</option>
+					</select>
+					<a class="btn btn-info btn-xs" ng-click="addDecisionOption()">Add Decision Option</a><br>
+				</div>
+

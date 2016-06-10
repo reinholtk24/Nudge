@@ -1,0 +1,23 @@
+<h3>All Scenarios</h3>
+				<table class="table table-striped table-hover">
+					<tr>
+						<th></th><th>Scenario Titles</th><th>Summary</th><th>ID</th>
+					</tr>
+					<tr ng-repeat="(key, scenario) in scenarios">
+						<td width="100px">
+							<a class="btn btn-info btn-xs" ng-click="playScenario();">Play Scenario</a><br>
+						</td>
+						<td>{{scenario.title}}</td>
+						<td>{{scenario.summary}}</td>
+						<td>{{scenario.id}}</td>
+					</tr>
+				</table>
+				<div ng-bind-html = narrativeToPlay.description>{{narrativeToPlay.description}}</div>
+					<div ng-repeat="decisionOption in decisionOptions" ng-show="decisionOption.associatedNarrative == narrativeToPlay.id">
+						<p>
+							{{decisionOption.description}} {{decisionOption.nextStep}}
+							<a class="btn btn-info btn-xs" ng-click="loadNextStep();">Navigate to next step</a><br>
+						</p>
+					</div> 
+				</div>
+				

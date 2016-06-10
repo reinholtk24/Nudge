@@ -1,0 +1,40 @@
+
+<!--choose a scenario, screen initializes with this section visible -->
+
+<div ng-hide="scenarioLoaded=='Y'">
+	<h3>All Scenarios</h3>
+	<table class="table table-striped table-hover">
+		<tr>
+			<th></th><th>Scenario Titles</th><th>Summary</th><th>ID</th>
+		</tr>
+		<tr ng-repeat="(key, scenario) in scenarios">
+			<td width="100px">
+				<a class="btn btn-info btn-xs" ng-click="playScenario();">Play Scenario</a><br>
+			</td>
+			<td>{{scenario.title}}</td>
+			<td>{{scenario.summary}}</td>
+			<td>{{scenario.id}}</td>
+		</tr>
+	</table>
+</div>
+<!-- /.choose a scenario section -->
+
+<!--loaded scenario section -->
+<div ng-show="scenarioLoaded=='Y'">
+<hr>
+<div id="scenariotitle" ng-show="scenarioLoaded=='Y'">{{scenarioToPlay.title}}</div>
+<hr>
+<div id="scenarioDescription" ng-bind-html = narrativeToPlay.description>{{narrativeToPlay.description}}</div><br><br>
+<hr>
+<div id="decisionoptiontitle">What do you do next?</div>
+<hr>
+	<div ng-repeat="decisionOption in decisionOptions" ng-show="decisionOption.associatedNarrative == narrativeToPlay.id">
+		<p>
+			{{decisionOption.description}} {{decisionOption.nextStep}}
+			<a class="btn btn-info btn-xs" ng-click="loadNextStep();">Navigate to next step</a><br>
+		</p>
+	</div> 
+</div>
+<a class="btn btn-info btn-xs" ng-click="exitScenario();" ng-show="scenarioLoaded=='Y'">Exit scenario</a><br><br>
+
+<!-- /.loaded scenario section -->

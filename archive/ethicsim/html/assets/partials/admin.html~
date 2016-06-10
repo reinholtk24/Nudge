@@ -1,0 +1,24 @@
+<h2>Admin Panel</h2>
+<h3>Add a Narrative</h3>
+<input type="text" ng-model="title" placeholder="Narrative Title">
+<input type="textarea" ng-model="summary" placeholder="Summary">
+<input type="textarea" ng-model="story" placeholder="Story">
+<a class="btn btn-info btn-xs" ng-click="addNarrative($event)">Save Narrative</a><br><br>
+<a href="#/story">a</a>
+
+
+<h3>All Narratives</h3>
+<table class="table table-striped table-hover">
+	<tr>
+		<th>View Details</th><th>Narrative Titles</th><th>Summary</th><th></th>
+	</tr>
+	<tr ng-repeat="(key, narrative) in narratives">
+		<td width="100px">
+			<a class="btn btn-info btn-xs" ng-click="setSelected();">+</a><br>
+		</td>
+		<td>{{narrative.title}}</td>
+		<td>{{narrative.summary}}</td>
+		<td width="150px">
+			<a class="btn btn-info btn-xs" ng-click="deleteNarrative(key)">Delete Narrative</a>
+	</tr>
+</table>

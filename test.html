@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>textillate.js DEMO</title>
+<link rel="stylesheet" href="assets/css/contents.css">
+<link rel="stylesheet" href="assets/css/animate.css">
+<link href='http://fonts.googleapis.com/css?family=Economica:400,700' rel='stylesheet'>
+<script src="assets/js/jquery-1.9.1.min.js"></script>
+<script src="assets/js/jquery.lettering.js"></script>
+<script src="assets/js/jquery.textillate.js"></script>
+<script>
+$(function () {
+  $('h1').textillate({
+    loop: true,
+    minDisplayTime: 2000,
+    initialDelay: 0,
+    autoStart: true,
+    inEffects: [],
+    outEffects: [ 'hinge' ],
+    in: {
+      effect: 'fadeInLeftBig',
+      delayScale: 1.5,
+      delay: 50,
+      sync: false,
+      shuffle: false
+    },
+    out: {
+      effect: 'hinge',
+      delayScale: 1.5,
+      delay: 50,
+      sync: false,
+      shuffle: false,
+    }
+  });
+})
+</script>
+</head>
+
+<body>
+<div id="page">
+  <h1>Welcome to NUDGE!</h1>
+</div>
+</body>
+</html>
+

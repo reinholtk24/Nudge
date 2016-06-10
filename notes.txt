@@ -1,0 +1,33 @@
+mysql -u <yourmysqlusername> '-p<yourpassword>'
+
+
+first change ' to /' and quotation marks " /" in all text files
+
+delete storys out of database
+
+create table storytable (id INT, storytitle TEXT, storylinetite TEXT,
+storyline LONGTEXT, position INT);
+
+
+LOAD DATA LOCAL INFILE '/var/www/html/nudge/storylinedata.txt' INTO TABLE
+storytable LINES TERMINATED BY '\r';
+
+
+
+create table results (id INT, storytitle TEXT, storylinetite TEXT, answer
+TINYTEXT, startprob INT, stopprob INT, gotostorylinetite TEXT);
+
+LOAD DATA LOCAL INFILE '/var/www/html/nudge/results.txt' INTO TABLE results
+LINES TERMINATED BY '\r';
+
+describe results;
+
+select * from results;
+
+
+create table answers (storytitle TEXT, storylinetite TEXT, answer TINYTEXT, answerchoice LONGTEXT);
+
+LOAD DATA LOCAL INFILE '/var/www/html/nudge/answers.txt' INTO TABLE answers LINES TERMINATED BY '\r';
+
+
+
