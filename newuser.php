@@ -5,26 +5,6 @@ session_start();
 Site : http:www.smarttutorials.net
 Author :muni
 --->
-
- 
-<?php
-require 'config.php';
-$category='';
-if(!empty($_POST['name'])){     
-     $name=$_POST['name'];
-     $pass=$_POST['password'];
-     $email=$_POST['email'];
-     $category=$_POST['category'];
-     $_SESSION['name']= $name;
-     $_SESSION['id'] = mysql_insert_id();
-}
-$category=$_POST['category'];
-$_SESSION['category']=$_POST['category'];
-if (filter_var($email, FILTER_VALIDATE_EMAIL)){
-mysql_query("INSERT INTO users (id, user_name,score,category_id,name,password )VALUES ('NULL','$email',0,'$category','$name', '$pass')") or die(mysql_error());
-mysql_query("INSERT INTO played(name) VALUES('$name')") or die(mysql_error());
-?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -76,59 +56,21 @@ mysql_query("INSERT INTO played(name) VALUES('$name')") or die(mysql_error());
           </ul>
         </div><!--/.nav-collapse -->
     </div>
-        <header>
-            <p class="text-center">
-                Welcome to nudge: <?php if(!empty($_SESSION['email'])){echo $_SESSION['email'];}?>
-            </p>
-        </header>
-<div class ="centered">
- <h2> Thank you for registering. You can now log in and use NUDGE! </h2>
-</div>
-
-
-       <footer>
-            <p class="text-center" id="foot">
-                &copy; <a href="http://dowell.colorado.edu/" target="_blank">Dowell Lab </a>2013
-            </p>
-        </footer>
- 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="assets/js/jquery.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.validate.min.js"></script>
- 
-        <script>
-        $('.cont').addClass('hide');
-        count=$('.questions').length;
-         $('#question'+1).removeClass('hide');
- 
-         $(document).on('click','.next',function(){
-             element=$(this).attr('id');
-             last = parseInt(element.substr(element.length - 1));
-             nex=last+1;
-             $('#question'+last).addClass('hide');
- 
-             $('#question'+nex).removeClass('hide');
-         });
- 
-         $(document).on('click','.previous',function(){
-             element=$(this).attr('id');
-             last = parseInt(element.substr(element.length - 1));
-             pre=last-1;
-             $('#question'+last).addClass('hide');
- 
-             $('#question'+pre).removeClass('hide');
-         });
- 
-        </script>
+	<header>
+		<p class="text-center">
+			Welcome to nudge: <?php if(!empty($_SESSION['email'])){echo $_SESSION['email'];}?>
+		</p>
+	</header>
+	<div class ="centered">
+		<h2> Thank you for registering. You can now log in and use NUDGE! </h2>
+		<h2 id="loginLink"><a href="index.php">Click here to login</a></h2> 
+	</div>
+	<footer>
+		<p class="text-center" id="foot">
+			&copy; <a href="http://dowell.colorado.edu/" target="_blank">Dowell Lab </a>2013
+		</p>
+	</footer>
     </body>
 </html>
-<?php }else{
- 
-   echo "Please enter a valid email";
-   header( 'Location nudge/index.php' ) ;
- 
-}
-?>
+
 
